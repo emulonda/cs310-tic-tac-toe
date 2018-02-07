@@ -16,7 +16,11 @@ public class TicTacToeView {
         
         /* Print the board to the console (see examples) */
         
-        /* INSERT YOUR CODE HERE */
+        for (int[]a : grid) {
+			for (int : a) {
+				System.out.print(i);
+			}
+			System.out.println("\n");
 
     }
 
@@ -24,7 +28,7 @@ public class TicTacToeView {
 
         /* Display a prompt for the player's next move (see examples) */
 
-        /* INSERT YOUR CODE HERE */
+        System.out.println("Enter the row and column numbers, seperated by a space:");
 
     }
 
@@ -32,7 +36,8 @@ public class TicTacToeView {
 
         /* Display an error if input is invalid (see examples) */
 
-        /* INSERT YOUR CODE HERE */
+        System.out.println("Input is invalid, try again");
+		
 
     }
 
