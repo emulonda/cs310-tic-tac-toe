@@ -15,12 +15,35 @@ public class TicTacToeView {
     public void viewModel() {
         
         /* Print the board to the console (see examples) */
-        
-        for (int[]a : grid) {
-			for (int : a) {
-				System.out.print(i);
+		
+		System.out.println("\n  012");
+        for(int i = 0; i < model.getWidth(); i++){
+            System.out.println("");
+            System.out.print(i + " ");
+            for (int j = 0; j < model.getWidth(); j++){
+                System.out.print(model.getMark(i, j));
+            }
+        }
+		 
+		for (int i = 0; i < getWidth(); i++) {
+				
+				System.out.println();
+				
+			for (int j = 0; j < getWidth(); i++) {
+				
+				System.out.println();
+				grid[i][j] = '-';
+				System.out.println(grid[i][j]);
 			}
-			System.out.println("\n");
+		}
+		
+		
+		
+        /*for (int[]a : grid) {
+			for (int : a) {
+				System.out.print(a);
+			}
+			System.out.println("\n");*/
 
     }
 
