@@ -1,6 +1,8 @@
 package edu.jsu.mcis;
 
 public class TicTacToeModel{
+	
+	
     
     private static final int DEFAULT_WIDTH = 3;
     
@@ -10,7 +12,7 @@ public class TicTacToeModel{
         
         X("X"), 
         O("O"), 
-        EMPTY(" ");
+        EMPTY("-");
 
         private String message;
         
@@ -92,7 +94,6 @@ public class TicTacToeModel{
            location, but only if the location is valid and if the square is
            empty! */
         
-        /* INSERT YOUR CODE HERE */
 		if (isValidSquare(row, col) && !isSquareMarked(row, col)) {
 			if (xTurn) {
 				grid[row][col] = Mark.X;
@@ -107,8 +108,8 @@ public class TicTacToeModel{
         
         /* Return true if specified location is within grid bounds */
         
-			if (! (row > model.getWidth())) {
-				if (!(col > model.getWidth())) {
+			if (! (row >= model.getWidth())) {
+				if (!(col >= model.getWidth())) {
 				return true;
 				}
 				else {
@@ -117,7 +118,7 @@ public class TicTacToeModel{
 			}
 			else {
 
-			view.showInputError();
+			return false;
 			
 			}
         
@@ -127,24 +128,12 @@ public class TicTacToeModel{
         
         /* Return true if square at specified location is marked */
         
-			if (grid[row][col].equals(Mark.EMPTY)) {
-				if (xTurn) {
-					grid[row][col] = Mark.X;
-					return true;
-				}
-				else {
-					grid[row][col] = Mark.O;
-					return true;
-					
-				}
-			}  	  
-    }
+			return !grid[row][col].equals(Mark.EMPTY);
 	
     public Mark getMark(int row, int col) {
         
         /* Return mark from the square at the specified location */
         
-        /* INSERT YOUR CODE HERE */
 			if (grid[row][col].equals(Mark.EMPTY)) {
 				if (xTurn) {
 					grid[row][col] = Mark.X;
@@ -153,16 +142,11 @@ public class TicTacToeModel{
 				else {
 					grid[row][col] = Mark.O;
 					return Mark.O;
-					
 				}
 			}
 			else {
-				return false
-			
-			}
-			
-			
-            
+				return false;
+			}    
     }
 	
     public Result getResult() {
@@ -189,16 +173,64 @@ public class TicTacToeModel{
         /* Check the squares of the board to see if the specified mark is the
            winner */
 		   
-       
-        for ( int i = 0; i < getWidth(); i++) {
+		boolean won = true;
+		//column
+		for (int col = 0; col < width; ++col) {
+			won = true;	
+			for (int row = 0; row < width; ++row) {
+				if (model.getMark(row, col) != mark) {
+					
+					won = false;
+					
+				}
+				if (won) {
+					return true;
+				}
+			}			
+		}
+		//Row
+		for (int row = 0; row < width; ++row) {
+			won = true;
+			for (int col = 0; col < width; ++row){
+				if (model.getMark(row, col) != mark) {
+					won = false;
+				}
+				if (won) {
+					return true;
+				}
+			}
+		}
+		// diagonal L to R
+		for (int i = 0; i < width; ++i) {
+			won = true;
+			if (model.getMark(i, width - i - 1)){
+				won = false;
+			}
+			if (won) {
+				return true;
+			}
+		}
+		// diagonal R to L
+		for (int i = 0; i < width; ++i) {
+			won = true;
+			if (model.getMark(i, width - i - 1)){
+				won = false;
+			}
+			if (won) {
+				return true;
+			}
+		}
+		
+		
+        /*for ( int i = 0; i < width; i++) {
 			
-			for (int j = 0; j <getWidth(); i++) {
+			for (int j = 0; j <width; i++) {
 				
-				if (mark.equals(getMark(grid[i][0], grid[i][1], grid[i][2])) == true) {
+				if (mark.equals(model.getMark(grid[i][0], grid[i][1], grid[i][2])) == true) {
 					return true;
 				}
 				
-				else if (mark.equals(getMark(grid[0][j], grid[1][j], grid[2][j])) == true) {
+				else if (mark.equals(model.getMark(grid[0][j], grid[1][j], grid[2][j])) == true) {
 					
 					return true;
 				}
@@ -206,19 +238,33 @@ public class TicTacToeModel{
 					return false;
 				}
 			}
-		}
+		}*/
     }
 	
     private boolean isTie() {
         
         /* Check the squares of the board to see if the game is a tie */
-
-        /* INSERT YOUR CODE HERE */
-
-        return false; /* remove this line! */
-        
-    }
-
+		boolean full = true;
+		for (int i = 0; i < width; ++i){
+			for (int j = 0; j < width; ++j){
+				if (getMark(i, j) == Mark.EMPTY) {
+					if (isMarkWin(Mark.X)){
+						return false;
+					}
+					else if (isMarkWin(Mark.O)) {
+						return false;
+					}
+					else { 
+						return true;
+					}
+				else {
+					return false;
+				
+				}
+			}
+		}
+			
+	}
     public boolean isGameover(){
         
         /* Return true if the game is over */

@@ -23,9 +23,10 @@ public class TicTacToeView {
             for (int j = 0; j < model.getWidth(); j++){
                 System.out.print(model.getMark(i, j));
             }
+			System.out.println();
         }
 		 
-		for (int i = 0; i < getWidth(); i++) {
+		/*for (int i = 0; i < getWidth(); i++) {
 				
 				System.out.println();
 				
@@ -35,23 +36,14 @@ public class TicTacToeView {
 				grid[i][j] = '-';
 				System.out.println(grid[i][j]);
 			}
-		}
-		
-		
-		
-        /*for (int[]a : grid) {
-			for (int : a) {
-				System.out.print(a);
-			}
-			System.out.println("\n");*/
-
+		}*/
     }
 
     public void showNextMovePrompt() {
 
         /* Display a prompt for the player's next move (see examples) */
 
-        System.out.println("Enter the row and column numbers, seperated by a space:");
+        System.out.println("Enter the row and column numbers, seperated by a space: ");
 
     }
 
