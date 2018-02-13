@@ -213,7 +213,7 @@ public class TicTacToeModel{
 		// diagonal R to L
 		for (int i = 0; i < width; ++i) {
 			won = true;
-			if (model.getMark(i, width - i - 1)){
+			if (model.getMark(i, width - i + 1)){
 				won = false;
 			}
 			if (won) {
@@ -257,6 +257,7 @@ public class TicTacToeModel{
 					else { 
 						return true;
 					}
+				}
 				else {
 					return false;
 				
