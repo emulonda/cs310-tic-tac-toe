@@ -75,18 +75,18 @@ public class TicTacToeModel{
         
         /* Create grid (width x width) as a 2D Mark array */
 
-        grid = new mark[width][width];
+        grid = new Mark[width][width];
 
         /* Initialize grid by filling every square with empty marks */
 
         for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[i].length; j++) {
-				grid[i][j] = mark.EMPTY;
+				grid[i][j] = Mark.EMPTY;
         
 			}
 		}
 	
-	
+	}
 	
     public boolean makeMark(int row, int col) {
         
@@ -97,31 +97,25 @@ public class TicTacToeModel{
 		if (isValidSquare(row, col) && !isSquareMarked(row, col)) {
 			if (xTurn) {
 				grid[row][col] = Mark.X;
+				return true;
 			}
 			else {
 				grid[row][col] = Mark.O;
-
-        
+				return true;
+			}
+		}
+		return false;
     }
 	
     private boolean isValidSquare(int row, int col) {
         
         /* Return true if specified location is within grid bounds */
-        
-			if (! (row >= model.getWidth())) {
-				if (!(col >= model.getWidth())) {
+        if ((row >= 0) && (row < width)){
+			if ((col >= 0) && (col < width)) {
 				return true;
-				}
-				else {
-				return false;
-				}
 			}
-			else {
-
-			return false;
-			
-			}
-        
+		}
+		return false;	
     }
 	
     private boolean isSquareMarked(int row, int col) {
@@ -129,29 +123,24 @@ public class TicTacToeModel{
         /* Return true if square at specified location is marked */
         
 			return !grid[row][col].equals(Mark.EMPTY);
+			
+	}
 	
     public Mark getMark(int row, int col) {
         
         /* Return mark from the square at the specified location */
-        
-			if (grid[row][col].equals(Mark.EMPTY)) {
-				if (xTurn) {
-					grid[row][col] = Mark.X;
-					return Mark.X;
-				}
-				else {
-					grid[row][col] = Mark.O;
-					return Mark.O;
-				}
-			}
-			else {
-				return false;
-			}    
+		if (isValidSquare(row, col)) {
+
+			return grid[row][col];
+				
+		}
+		return null;
+		
     }
 	
     public Result getResult() {
         
-        /* Use isMarkWin() to see if X or O is the winner, if the game is a
+		/* Use isMarkWin() to see if X or O is the winner, if the game is a
            tie, or if the game is not over, and return the corresponding Result
            value */
         if (isMarkWin(Mark.X)) {
@@ -178,7 +167,7 @@ public class TicTacToeModel{
 		for (int col = 0; col < width; ++col) {
 			won = true;	
 			for (int row = 0; row < width; ++row) {
-				if (model.getMark(row, col) != mark) {
+				if (getMark(row, col) != mark) {
 					
 					won = false;
 					
@@ -192,7 +181,7 @@ public class TicTacToeModel{
 		for (int row = 0; row < width; ++row) {
 			won = true;
 			for (int col = 0; col < width; ++row){
-				if (model.getMark(row, col) != mark) {
+				if (getMark(row, col) != mark) {
 					won = false;
 				}
 				if (won) {
@@ -203,7 +192,7 @@ public class TicTacToeModel{
 		// diagonal L to R
 		for (int i = 0; i < width; ++i) {
 			won = true;
-			if (model.getMark(i, width - i - 1)){
+			if (getMark(i, width - i - 1) != mark){
 				won = false;
 			}
 			if (won) {
@@ -213,32 +202,15 @@ public class TicTacToeModel{
 		// diagonal R to L
 		for (int i = 0; i < width; ++i) {
 			won = true;
-			if (model.getMark(i, width - i + 1)){
+			if (getMark(i, width - i + 1) != mark){
 				won = false;
 			}
 			if (won) {
 				return true;
 			}
 		}
+		return false;
 		
-		
-        /*for ( int i = 0; i < width; i++) {
-			
-			for (int j = 0; j <width; i++) {
-				
-				if (mark.equals(model.getMark(grid[i][0], grid[i][1], grid[i][2])) == true) {
-					return true;
-				}
-				
-				else if (mark.equals(model.getMark(grid[0][j], grid[1][j], grid[2][j])) == true) {
-					
-					return true;
-				}
-				else {
-					return false;
-				}
-			}
-		}*/
     }
 	
     private boolean isTie() {
@@ -264,7 +236,7 @@ public class TicTacToeModel{
 				}
 			}
 		}
-			
+		return false;	
 	}
     public boolean isGameover(){
         
