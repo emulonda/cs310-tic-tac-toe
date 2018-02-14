@@ -97,10 +97,12 @@ public class TicTacToeModel{
 		if (isValidSquare(row, col) && !isSquareMarked(row, col)) {
 			if (xTurn) {
 				grid[row][col] = Mark.X;
+				xTurn = !xTurn;
 				return true;
 			}
 			else {
 				grid[row][col] = Mark.O;
+				xTurn = !xTurn;
 				return true;
 			}
 		}
@@ -162,53 +164,60 @@ public class TicTacToeModel{
         /* Check the squares of the board to see if the specified mark is the
            winner */
 		   
-		boolean won = true;
+		boolean won;
 		//column
 		for (int col = 0; col < width; ++col) {
 			won = true;	
 			for (int row = 0; row < width; ++row) {
-				if (getMark(row, col) != mark) {
+				if (grid[row][col] != mark) {
 					
 					won = false;
 					
 				}
-				if (won) {
-					return true;
+			
+			}
+			if (won) {
+				return true;
 				}
-			}			
 		}
 		//Row
+		
 		for (int row = 0; row < width; ++row) {
 			won = true;
-			for (int col = 0; col < width; ++row){
-				if (getMark(row, col) != mark) {
+			for (int col = 0; col < width; ++col){
+				if (grid[row][col] != mark) {
 					won = false;
 				}
-				if (won) {
-					return true;
-				}
+				
+			}
+			if (won) {
+				return true;
 			}
 		}
 		// diagonal L to R
+		won = true;
 		for (int i = 0; i < width; ++i) {
-			won = true;
-			if (getMark(i, width - i - 1) != mark){
+			
+			if (grid[i][width - i - 1] != mark){
 				won = false;
 			}
-			if (won) {
+
+		}
+		if (won) {
 				return true;
 			}
-		}
 		// diagonal R to L
+		won = true;
 		for (int i = 0; i < width; ++i) {
-			won = true;
-			if (getMark(i, width - i + 1) != mark){
+			
+			if (grid[i][i] != mark){
 				won = false;
 			}
-			if (won) {
-				return true;
-			}
+
 		}
+		if (won) {
+			return true;
+			}
 		return false;
 		
     }
@@ -219,24 +228,13 @@ public class TicTacToeModel{
 		boolean full = true;
 		for (int i = 0; i < width; ++i){
 			for (int j = 0; j < width; ++j){
-				if (getMark(i, j) == Mark.EMPTY) {
-					if (isMarkWin(Mark.X)){
-						return false;
-					}
-					else if (isMarkWin(Mark.O)) {
-						return false;
-					}
-					else { 
-						return true;
-					}
-				}
-				else {
-					return false;
-				
-				}
+				if (getMark(i, j) == Mark.EMPTY) 
+					full = false;
+					
 			}
 		}
-		return false;	
+		if (!full) 	return false;
+		return !((isMarkWin(Mark.X)) || (isMarkWin(Mark.O)));
 	}
     public boolean isGameover(){
         
