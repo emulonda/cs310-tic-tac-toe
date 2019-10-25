@@ -5,7 +5,7 @@ This project gave me additional experience with the Gradle build system, and wit
 The program requires a compiler compliance level of Java 1.8 to run.
 To execute the program simply download the repository, compile the code, and run.
 
-Complete the implementation, using the incomplete versions provided in the repository as a starting point. The only files that I are the Java source files:
+Complete the implementation, using the incomplete versions provided in the repository as a starting point. The only files that I received are the Java source files:
 
 TicTacToe.java TicTacToeMove.java TicTacToeModel.java TicTacToeView.java TicTacToeController.java
 
