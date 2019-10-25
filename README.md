@@ -11,8 +11,7 @@ TicTacToe.java TicTacToeMove.java TicTacToeModel.java TicTacToeView.java TicTacT
 
 My first version of this program will use the console for input and output;
 
-Part Two of this assignment will involve upgrading my implementation to use a GUI. To make this transition easier, I provided implementation which is structured using the Model-View-Controller design pattern, in which the board is the Model, the terminal window is the View, and the Controller receives and processes keyboard input.
-Output
+# Output
 
 When the game is finished, the output should precisely match the following example (the players' input is shown in bold):
 
